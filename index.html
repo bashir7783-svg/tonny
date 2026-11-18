@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pensive Tone | Premium Glass Gallery</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    background: linear-gradient(135deg,#080e20,#14243c,#251b43);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+/* Background Glow */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(110px);
+    z-index: -1;
+    opacity: .5;
+    pointer-events: none;
+}
+
+body::before {
+    background: #00c6ff;
+    top: 5%;
+    left: -120px;
+}
+
+body::after {
+    background: #a044ff;
+    bottom: 5%;
+    right: -100px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 45px 15px;
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+header h1 {
+    font-size: 36px;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg,#00eaff,#fff,#d9a7ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+header p {
+    color: #c8d8ed;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* Main */
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 45px auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #b7c5da;
+}
+
+/* Refresh Button */
+.refresh-area {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.refresh-btn {
+    padding: 13px 25px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 30px;
+    background: linear-gradient(135deg,#00c6ff,#7b2ff7);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 8px 25px rgba(0,198,255,.2);
+}
+
+.refresh-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(123,47,247,.4);
+}
+
+.refresh-btn i {
+    margin-right: 8px;
+}
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 28px;
+}
+
+/* Glass Card */
+.card {
+    position: relative;
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+    transition: .4s ease;
+}
+
+.card:hover {
+    transform: translateY(-9px);
+    border-color: #00d9ff;
+    box-shadow: 0 18px 40px rgba(0,217,255,.2);
+}
+
+/* Image */
+.card img {
+    display: block;
+    width: 100%;
+    height: 235px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform .6s ease, opacity .3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.07);
+}
+
+.card img.changing {
+    opacity: .3;
+}
+
+/* Change Image Label */
+.image-label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,.6);
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    pointer-events: none;
+}
+
+/* Content */
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-content h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 9px;
+}
+
+.card-content p {
+    color: #c3cee0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Social Card */
+.social-card {
+    margin-top: 45px;
+    padding: 35px 20px;
+    text-align: center;
+    background: rgba(255,255,255,.09);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.2);
+}
+
+.social-card h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.social-card p {
+    color: #c4d1e5;
+    margin-bottom: 23px;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.social-links a {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    transition: .35s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-7px) scale(1.08);
+    background: linear-gradient(135deg,#00c6ff,#7b2ff7);
+    box-shadow: 0 8px 22px rgba(0,198,255,.35);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 15px;
+    background: rgba(0,0,0,.3);
+    border-top: 1px solid rgba(255,255,255,.12);
+    color: #bdc9dc;
+    margin-top: 55px;
+    line-height: 1.9;
+}
+
+footer span {
+    color: #00eaff;
+    font-weight: bold;
+}
+
+footer .heart {
+    color: #ff6b9d;
+}
+
+/* Responsive */
+@media(max-width:600px) {
+    header {
+        padding: 35px 12px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .container {
+        width: 90%;
+        margin: 30px auto;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .card img {
+        height: 225px;
+    }
+
+    .social-card h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>The Pensive Tone</h1>
+    <p>A Beautiful Collection of Nature, Art & Inspiration</p>
+</header>
+
+<main class="container">
+
+    <div class="section-title">
+        <h2>✦ Our Elegant Gallery ✦</h2>
+        <p>Beauty, Creativity & Timeless Inspiration</p>
+    </div>
+
+    <!-- Refresh All Images -->
+    <div class="refresh-area">
+        <button class="refresh-btn" onclick="changeAllImages()">
+            <i class="fas fa-sync-alt"></i>
+            Explore New Images
+        </button>
+    </div>
+
+    <!-- Gallery -->
+    <section class="gallery">
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800"
+                 alt="Artistic beauty" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Artistic Beauty</h2>
+                <p>Discover the beauty of creativity and imagination.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800"
+                 alt="Beautiful flowers" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Floral Elegance</h2>
+                <p>Experience the delicate charm of nature.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800"
+                 alt="Creative moments" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Creative Moments</h2>
+                <p>Where creativity meets timeless elegance.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800"
+                 alt="Waterfall" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Nature's Wonder</h2>
+                <p>Find peace in the beauty of the natural world.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800"
+                 alt="Scenic photography" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Visual Harmony</h2>
+                <p>Enjoy beautiful moments captured through photography.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
+                 alt="Mountain scenery" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Mountain Serenity</h2>
+                <p>Explore the magnificent beauty of majestic mountains.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
+                 alt="Blue ocean" onclick="changeImage(this)">
+            <span class="image-label">Click to Change</span>
+            <div class="card-content">
+                <h2>Ocean Dreams</h2>
+                <p>Discover the peaceful charm of endless blue waters.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800"
+                 alt="Sunset landscape" onclick="changeImage(this)">
+            <span class="image-label">Touch to Change</span>
+            <div class="card-content">
+                <h2>Golden Sunset</h2>
+                <p>Celebrate the breathtaking colors of the evening sky.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Social Card -->
+    <section class="social-card">
+
+        <h2>Stay Connected With Us</h2>
+        <p>Follow The Pensive Tone and explore more inspiration.</p>
+
+        <div class="social-links">
+
+            <a href="https://www.facebook.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="https://www.instagram.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://www.youtube.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <a href="https://www.pinterest.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="Pinterest">
+                <i class="fab fa-pinterest-p"></i>
+            </a>
+
+            <a href="https://www.whatsapp.com/" target="_blank"
+               rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>
+        © 2026 <span>The Pensive Tone</span> |
+        All Rights Reserved.
+    </p>
+    <p>Designed with <span class="heart">♥</span> and Creativity</p>
+    <p>Developed by <span>Executive Programmer Md. Bashir Ahamed</span></p>
+</footer>
+
+<script>
+
+/* Online Image Collection */
+const imageCollection = [
+    "photo-1470252649378-9c29740c9fa8",
+    "photo-1490750967868-88aa4486c946",
+    "photo-1470225620780-dba8ba36b745",
+    "photo-1432405972618-c60b0225b8f9",
+    "photo-1470770841072-f978cf4d019e",
+    "photo-1464822759023-fed622ff2c3b",
+    "photo-1507525428034-b723cf961d3e",
+    "photo-1500530855697-b586d89ba3ee",
+    "photo-1472214103451-9374bd1c798e",
+    "photo-1441974231531-c6227db76b6e",
+    "photo-1518837695005-2083093ee35b",
+    "photo-1501785888041-af3ef285b470",
+    "photo-1470252649378-9c29740c9fa8",
+    "photo-1500534314209-a25ddb2bd429",
+    "photo-1519681393784-d120267933ba",
+    "photo-1469474968028-56623f02e42e"
+];
+
+/* Get a Random Image */
+function getRandomImage(currentSrc) {
+
+    let newImage;
+
+    do {
+        const randomIndex = Math.floor(
+            Math.random() * imageCollection.length
+        );
+
+        newImage = "https://images.unsplash.com/" +
+                   imageCollection[randomIndex] +
+                   "?auto=format&fit=crop&w=900&q=85";
+
+    } while (newImage === currentSrc);
+
+    return newImage;
+}
+
+/* Change Individual Image */
+function changeImage(img) {
+
+    const oldImage = img.src;
+
+    img.classList.add("changing");
+
+    const newImage = getRandomImage(oldImage);
+
+    const tempImage = new Image();
+
+    tempImage.onload = function() {
+        img.src = newImage;
+        img.classList.remove("changing");
+    };
+
+    tempImage.onerror = function() {
+        img.classList.remove("changing");
+        console.log("Unable to load image. Please try again.");
+    };
+
+    tempImage.src = newImage;
+}
+
+/* Change All Gallery Images */
+function changeAllImages() {
+
+    const images = document.querySelectorAll(".card img");
+
+    images.forEach(function(img, index) {
+
+        setTimeout(function() {
+            changeImage(img);
+        }, index * 120);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
